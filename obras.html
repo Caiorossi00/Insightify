@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/d3fb1e03fb.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="shortcut icon"
+      href="https://w7.pngwing.com/pngs/233/303/png-transparent-letter-alphabet-i-z-information-miscellaneous-text-hand.png"
+      type="image/x-icon"
+    />
+    <title>Insightify</title>
+  </head>
+  <body>
+    <header>
+      <div class="menu-icon" id="menuIcon">&#9776;</div>
+      <div class="menu" id="menu">
+        <select id="languageSelector">
+          <option value="PT">Português</option>
+          <option value="EN">English</option>
+          <option value="ES">Español</option>
+          <option value="IT">Italiano</option>
+        </select>
+        <button class="hide"><i class="fa-regular fa-eye-slash"></i></button>
+        <button class="song"><i class="fa-solid fa-music"></i></button>
+        <button class="infos"><i class="fa-solid fa-info"></i></button>
+      </div>
+    </header>
+
+    <div class="left hideable">
+      <p class="obra"></p>
+      <p class="autor"></p>
+      <p class="ano"></p>
+    </div>
+
+    <div class="container hideable">
+      <div class="box">
+        <ul id="artList"></ul>
+      </div>
+      <div class="lower">
+        <button class="audio">
+          <i class="fa-solid fa-audio-description"></i>
+        </button>
+      </div>
+    </div>
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <h2>Informações</h2>
+        <p>
+          Bem-vindo ao Insightify, sua plataforma de descoberta artística! Aqui,
+          você pode explorar diversas obras de arte e obter informações
+          detalhadas sobre cada uma delas.
+        </p>
+        <p>
+          Utilize os seguintes recursos para aproveitar ao máximo sua
+          experiência:
+        </p>
+        <ul>
+          <li>
+            <strong>Seleção de Idioma:</strong> No canto superior direito, use o
+            menu para escolher seu idioma preferido.
+          </li>
+          <li>
+            <strong>Ocultar/Exibir Informações:</strong> O botão com o ícone de
+            olho permite ocultar ou exibir os detalhes sobre a obra de arte.
+          </li>
+          <li>
+            <strong>Navegação:</strong> Explore aleatoriamente outras obras de
+            arte com o botão de seta à direita.
+          </li>
+          <li>
+            <strong>Áudio Descrição:</strong> Ative a descrição auditiva do
+            quadro clicando no botão de áudio.
+          </li>
+        </ul>
+        <p>Desfrute da sua jornada artística.</p>
+        <button class="instagram">
+          <a href="https://www.instagram.com/caio_.rossi/" target="_blank">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+        </button>
+        <button class="github">
+          <a href="https://github.com/seu-usuario" target="_blank">
+            <i class="fa-brands fa-github"></i>
+          </a>
+        </button>
+      </div>
+    </div>
+
+    <script type="module" src="script.js" defer></script>
+    <script type="module" src="artes.js" defer></script>
+  </body>
+</html>

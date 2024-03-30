@@ -172,6 +172,11 @@ document.addEventListener("DOMContentLoaded", function () {
     modal.style.display = "none";
   });
 
+  document.addEventListener("DOMContentLoaded", function () {
+    const windowHeight = window.innerHeight;
+    document.body.style.height = windowHeight + "100vh";
+  });
+
   window.addEventListener("click", function (event) {
     if (event.target === modal) {
       modal.style.display = "none";

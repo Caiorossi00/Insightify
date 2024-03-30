@@ -1,4 +1,4 @@
-import { artesEN, artesPT, artesES, artesIT } from "./artes.js";
+import { artesEN, artesPT, artesES } from "./artes.js";
 
 let currentLanguage = "PT";
 let displayedArtIndexes = [];
@@ -14,6 +14,19 @@ languageSelector.addEventListener("change", () => {
 function resetDisplayedArtIndexes() {
   displayedArtIndexes = [];
   allArtIndexes = Array.from({ length: artesEN.length }, (_, index) => index);
+  resetButton.style.display = "none";
+}
+
+function getRandomIndexFromRemaining() {
+  const remainingIndexes = allArtIndexes.filter(
+    (index) => !displayedArtIndexes.includes(index)
+  );
+  if (remainingIndexes.length === 0) {
+    return undefined;
+  }
+  const randomIndex =
+    remainingIndexes[Math.floor(Math.random() * remainingIndexes.length)];
+  return randomIndex;
 }
 
 function displayRandomArt() {
@@ -29,11 +42,41 @@ function displayRandomArt() {
   const ano = document.querySelector(".ano");
   ano.innerHTML = "";
 
-  if (allArtIndexes.length === 0) {
-    resetDisplayedArtIndexes();
+  let endOfGalleryMessage;
+  switch (currentLanguage) {
+    case "EN":
+      endOfGalleryMessage =
+        "You've reached the end!<br>Click the button to reset the gallery<br><br>Thank you for reaching here.<br>I would greatly appreciate your feedback, you can message me on Instagram @Caiorossi.dev";
+      break;
+    case "PT":
+      endOfGalleryMessage =
+        "Você chegou ao final!<br>Clique no botão para reiniciar a galeria<br><br>Obrigado por chegar até aqui.<br>Gostaria muito do seu feedback, você pode me mandar mensagem pelo instagram @Caiorossi.dev";
+      break;
+    case "ES":
+      endOfGalleryMessage =
+        "¡Has llegado al final!<br>Haz clic en el botón para reiniciar la galería<br><br>Gracias por llegar hasta aquí.<br>Apreciaría mucho tus comentarios, puedes enviarme un mensaje en Instagram @Caiorossi.dev";
+      break;
+  }
+
+  const remainingIndexes = allArtIndexes.filter(
+    (index) => !displayedArtIndexes.includes(index)
+  );
+
+  if (remainingIndexes.length === 0) {
+    artList.innerHTML = endOfGalleryMessage;
+    artList.style.marginTop = "2em";
+    resetButton.style.display = "block";
+    return;
   }
 
   const randomIndex = getRandomIndexFromRemaining();
+  if (randomIndex === undefined) {
+    artList.innerHTML = endOfGalleryMessage;
+    artList.style.marginTop = "2em";
+    resetButton.style.display = "block";
+    return;
+  }
+
   const randomArt = getArtByLanguage(randomIndex);
 
   if (randomArt) {
@@ -56,17 +99,13 @@ function displayRandomArt() {
     document.body.style.backgroundImage = `url('${randomArt.image}')`;
 
     displayedArtIndexes.push(randomIndex);
-    console.log(allArtIndexes);
-  }
-}
 
-function getRandomIndexFromRemaining() {
-  const remainingIndexes = allArtIndexes.filter(
-    (index) => !displayedArtIndexes.includes(index)
-  );
-  const randomIndex =
-    remainingIndexes[Math.floor(Math.random() * remainingIndexes.length)];
-  return randomIndex;
+    if (remainingIndexes.length === 0) {
+      resetButton.style.display = "block";
+    } else {
+      resetButton.style.display = "none";
+    }
+  }
 }
 
 function getArtByLanguage(index) {
@@ -77,33 +116,10 @@ function getArtByLanguage(index) {
       return artesPT[index];
     case "ES":
       return artesES[index];
-    case "IT":
-      return artesIT[index];
     default:
       return artesPT[index];
   }
 }
-
-function preloadImages() {
-  const allImages = [...artesEN, ...artesPT].map((art) => art.image);
-  return Promise.all(
-    allImages.map(
-      (src) =>
-        new Promise((resolve, reject) => {
-          const img = new Image();
-          img.src = src;
-          img.onload = resolve;
-          img.onerror = reject;
-        })
-    )
-  );
-}
-
-preloadImages().then(() => {
-  displayRandomArt();
-
-  randomNextButton.addEventListener("click", displayRandomArt);
-});
 
 const randomNextButton = document.createElement("button");
 randomNextButton.id = "randomnext";
@@ -111,6 +127,20 @@ randomNextButton.innerHTML = `<i class="fa-solid fa-forward"></i>`;
 
 const lowerDiv = document.querySelector(".lower");
 
+randomNextButton.addEventListener("click", displayRandomArt);
+
+const resetButton = document.createElement("button");
+resetButton.id = "resetButton";
+resetButton.innerHTML = `<i class="fa-solid fa-rotate-left"></i>`;
+resetButton.style.display = "none";
+resetButton.style.width = "fit-content";
+
+resetButton.addEventListener("click", () => {
+  resetDisplayedArtIndexes();
+  displayRandomArt();
+});
+
+lowerDiv.appendChild(resetButton);
 lowerDiv.appendChild(randomNextButton);
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -122,18 +152,14 @@ document.addEventListener("DOMContentLoaded", function () {
       element.classList.toggle("hidden");
     });
   });
-});
 
-document.addEventListener("DOMContentLoaded", function () {
   const menuIcon = document.getElementById("menuIcon");
   const menu = document.getElementById("menu");
 
   menuIcon.addEventListener("click", function () {
     menu.classList.toggle("show");
   });
-});
 
-document.addEventListener("DOMContentLoaded", function () {
   const infosButton = document.querySelector(".infos");
   const modal = document.getElementById("modal");
   const closeModalButton = document.getElementById("closeModal");

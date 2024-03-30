@@ -46,15 +46,15 @@ function displayRandomArt() {
   switch (currentLanguage) {
     case "EN":
       endOfGalleryMessage =
-        "You've reached the end!<br>Click the button to reset the gallery<br><br>Thank you for reaching here.<br>I would greatly appreciate your feedback, you can message me on Instagram @Caiorossi.dev";
+        "You've reached the end!<br>Click the button to reset the gallery<br>Thank you for reaching here.<br>@Caiorossi.dev";
       break;
     case "PT":
       endOfGalleryMessage =
-        "Você chegou ao final!<br>Clique no botão para reiniciar a galeria<br><br>Obrigado por chegar até aqui.<br>Gostaria muito do seu feedback, você pode me mandar mensagem pelo instagram @Caiorossi.dev";
+        "Você chegou ao final!<br>Clique no botão para reiniciar a galeria<br>Obrigado por chegar até aqui.<br>@Caiorossi.dev";
       break;
     case "ES":
       endOfGalleryMessage =
-        "¡Has llegado al final!<br>Haz clic en el botón para reiniciar la galería<br><br>Gracias por llegar hasta aquí.<br>Apreciaría mucho tus comentarios, puedes enviarme un mensaje en Instagram @Caiorossi.dev";
+        "¡Has llegado al final!<br>Haz clic en el botón para reiniciar la galería<br>Gracias por llegar hasta aquí.<br>@Caiorossi.dev";
       break;
   }
 
